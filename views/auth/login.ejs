@@ -1,0 +1,46 @@
+<%- include('../partials/header') %> <!-- Incluir el encabezado -->
+
+<main>
+
+<!-- Formulario de Registro de Usuario -->
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header text-center">
+          <h4>Iniciar Sesión</h4>
+        </div>
+        <div class="card-body">
+          <form method="POST" action="">
+
+            <!-- Correo Electrónico -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Correo Electrónico</label>
+              <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+
+            <!-- Contraseña -->
+            <div class="mb-3">
+              <label for="password" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+
+            <!-- Botón de Registro -->
+            <div class="mb-3 text-center">
+              <button type="submit" class="btn btn-primary">Ingresar</button>
+            </div>
+
+            <div class="text-center">
+              <p>¿No tienes una cuenta? <a href="/users/login">Regístrate</a></p>
+            </div>
+            <%- include('../partials/error-message') %> 
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<%- include('../partials/footer') %> <!-- Incluir el pie de página -->

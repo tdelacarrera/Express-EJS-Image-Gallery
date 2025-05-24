@@ -1,0 +1,96 @@
+<%- include('../partials/header') %> <!-- Incluir el encabezado -->
+
+<main>
+
+<div class="container mt-5">
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header text-center">
+                <h4>Subir Imagen</h4>
+            </div>
+            <div class="card-body">
+                <form action="/images/create" method="POST" enctype="multipart/form-data">
+
+                    <!-- Imagen -->
+                    <div class="form-group mb-3">
+                        <label for="file" class="form-label">Imagen</label>
+                        <input type="file" name="file" id="file" class="form-control  required>
+                    </div>
+
+                    <!-- Etiquetas -->
+                    <div class="form-group mb-3">
+                        <label for="tags" class="form-label">Etiquetas</label>
+                        <div class="d-flex flex-wrap tags-input">
+                            <ul id="tags" class="list-inline mb-2">
+                                <% 
+                                var old 
+                                if (old && old.tags) { 
+                                    old.tags.split(',').forEach(tag => { %>
+                                    <li><%= tag.trim() %><button class="delete-button">X</button></li>
+                                <% }) } %>
+                            </ul>
+                            <input type="text" id="tag" class="form-control" placeholder="Agregar etiqueta" />
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="tags" id="tags-input">
+
+                    <!-- Botón de Enviar -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+    const tagsList = document.getElementById('tags');
+    const inputTag = document.getElementById('tag');
+    const tagsInputField = document.getElementById('tags-input');
+
+    let tags = Array.from(tagsList.querySelectorAll('li')).map(li => li.innerText.replace('X', '').trim());
+
+    function updateTagsInput() {
+        tagsInputField.value = tags.join(',');
+    }
+
+    inputTag.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+
+            const tagContent = inputTag.value.trim();
+            
+            if (tagContent && !tags.includes(tagContent)) {
+                tags.push(tagContent);
+
+                const tagItem = document.createElement('li');
+                tagItem.innerHTML = tagContent + '<button class="delete-button">X</button>';
+
+                tagsList.appendChild(tagItem);
+                inputTag.value = '';
+                updateTagsInput();
+            }
+        }
+    });
+
+    tagsList.addEventListener('click', function(event) {
+        if (event.target.classList.contains('delete-button')) {
+            const tagItem = event.target.parentNode;
+            const tagText = tagItem.innerText.replace('X', '').trim();
+            tags = tags.filter(tag => tag !== tagText);
+            tagItem.remove();
+            updateTagsInput();
+        }
+    });
+
+    updateTagsInput();
+</script>
+
+</main>
+
+<%- include('../partials/footer') %> <!-- Incluir el pie de página -->

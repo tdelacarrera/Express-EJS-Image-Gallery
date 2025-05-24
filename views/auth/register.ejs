@@ -1,0 +1,54 @@
+<%- include('../partials/header') %> <!-- Incluir el encabezado -->
+
+<!-- Formulario de Registro de Usuario -->
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header text-center">
+          <h4>Registro de Usuario</h4>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="/users/register">
+            <!-- Aquí debes manejar el CSRF si usas csurf en Express -->
+
+            <!-- Nombre -->
+            <div class="mb-3">
+              <label for="username" class="form-label">Nombre Completo</label>
+              <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+
+            <!-- Correo Electrónico -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Correo Electrónico</label>
+              <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+
+            <!-- Contraseña -->
+            <div class="mb-3">
+              <label for="password" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+
+            <!-- Confirmación de Contraseña -->
+            <div class="mb-3">
+              <label for="password_confirmation" class="form-label">Confirmar Contraseña</label>
+              <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+            </div>
+
+            <!-- Botón de Registro -->
+            <div class="mb-3 text-center">
+              <button type="submit" class="btn btn-primary">Registrarse</button>
+            </div>
+
+            <div class="text-center">
+              <p>¿Ya tienes una cuenta? <a href="/users/register">Inicia sesión</a></p>
+            </div>
+             <%- include('../partials/error-message') %> 
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('../partials/footer') %> <!-- Incluir el pie de página -->

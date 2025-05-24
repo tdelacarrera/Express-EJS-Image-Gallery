@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Images</title>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Galería</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/images">Imágenes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/images/upload">Subir Imagen</a>
+                    </li>
+                    <% if(user && user.role == 'Admin') { %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users">Administrar Usuarios</a>
+                    </li>
+                    <% } %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/register">Registro</a>
+                    </li>
+                    <% if(!user) { %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/login">Iniciar Sesión</a>
+                    </li>
+                    <% }else{ %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/logout">Cerrar Sesión</a>
+                    </li>
+                    <% } %>
+
+                </ul>
+            </div>
+        </div>
+    </nav>

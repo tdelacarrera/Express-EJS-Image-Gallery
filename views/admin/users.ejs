@@ -1,0 +1,167 @@
+<%- include('../partials/header') %> <!-- Incluir el encabezado -->
+
+<main>
+
+<div class="container mt-5">
+  <h2>Listado de Usuarios</h2>
+
+  <!-- Botón para abrir modal de creación -->
+  <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#createModal">
+      Crear Usuario
+  </button>
+
+  <table class="table table-striped mt-3">
+      <thead>
+          <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Rol</th>
+              <th>Acciones</th>
+          </tr>
+      </thead>
+      <tbody>
+          <% users.forEach(user => { %>
+              <tr>
+                  <td><%= user.user_id %></td>
+                  <td><%= user.username %></td>
+                  <td><%= user.email %></td>
+                  <td><%= user.role %></td>
+                  <td>
+                      <!-- Botón para abrir modal de edición -->
+                      <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editModal<%= user.user_id %>">
+                          Editar
+                      </button>
+
+                      <!-- Botón de eliminar con enlace al modal de confirmación -->
+                      <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal<%= user.user_id %>">
+                          Eliminar
+                      </button>
+                  </td>
+              </tr>
+          <% }) %>
+      </tbody>
+  </table>
+</div>
+
+<!-- Modales de Edición -->
+<% users.forEach(user => { %>
+<div class="modal fade" id="editModal<%= user.user_id %>" tabindex="-1" aria-labelledby="editModalLabel<%= user.user_id %>" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form method="POST" action="/users/update">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="editModalLabel<%= user.user_id %>">Editar Usuario</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="name<%= user.user_id %>" class="form-label">Nombre Completo</label>
+            <input type="text" class="form-control" id="name<%= user.user_id %>" name="username" value="<%= user.username %>" required>
+          </div>
+          <div class="mb-3">
+            <label for="email<%= user.user_id %>" class="form-label">Correo Electrónico</label>
+            <input type="email" class="form-control" id="email<%= user.user_id %>" name="email" value="<%= user.email %>" required>
+          </div>
+          <div class="mb-3">
+            <label for="role<%= user.user_id %>" class="form-label">Rol</label>
+            <select class="form-control" id="role<%= user.user_id %>" name="role" value=<%= user.role %> required>
+              <option value="" disabled selected>Selecciona un rol</option>
+              <option value="Admin">Admin</option>
+              <option value="Usuario">Usuario</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="password<%= user.user_id %>" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="password<%= user.user_id %>" name="password">
+          </div>
+          <div class="mb-3">
+            <label for="password_confirmation<%= user.user_id %>" class="form-label">Confirmar Contraseña</label>
+            <input type="password" class="form-control" id="password_confirmation<%= user.user_id %>" name="password_confirmation">
+          </div>
+        </div>
+        <input type="hidden" name="id" value="<%= user.user_id %>">
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+         <%- include('../partials/error-message') %> 
+      </form>
+    </div>
+  </div>
+</div>
+<% }) %>
+
+<!-- Modal de Creación -->
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form method="POST" action="/users/create">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="createModalLabel">Crear Usuario</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="username" class="form-label">Nombre de usuario</label>
+            <input type="text" class="form-control" id="username" name="username" required>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Correo Electrónico</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+          </div>
+          <div class="mb-3">
+            <label for="role" class="form-label">Rol</label>
+            <select class="form-control" id="role" name="role" required>
+              <option value="" disabled selected>Selecciona un rol</option>
+              <option value="Admin">Admin</option>
+              <option value="Usuario">Usuario</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+          </div>
+          <div class="mb-3">
+            <label for="password_confirmation" class="form-label">Confirmar Contraseña</label>
+            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Crear</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+         <%- include('../partials/error-message') %> 
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Confirmación de Eliminación -->
+<% users.forEach(user => { %>
+<div class="modal fade" id="deleteModal<%= user.user_id %>" tabindex="-1" aria-labelledby="deleteModalLabel<%= user.user_id %>" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel<%= user.user_id %>">Confirmar Eliminación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        ¿Estás seguro de que deseas eliminar a <%= user.username %>?
+      </div>
+      <div class="modal-footer">
+        <!-- Formulario de eliminación con confirmación -->
+        <form action="/users/remove" method="POST" class="d-inline">
+          <input type="hidden" name="id" value="<%= user.user_id %>">
+          <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<% }) %>
+
+</main>
+
+<%- include('../partials/footer') %> <!-- Incluir el pie de página -->
