@@ -4,6 +4,7 @@ import {methods as imagesController} from "../controllers/images.controller.js";
 const router = express.Router();
 const upload = multer({ dest: 'public/uploads' });
 
+router.get('/', imagesController.getImages);
 router.get('/images', imagesController.getImages);
 router.get('/images/upload',imagesController.getImageForm);
 router.post('/images/create', upload.single('file'),imagesController.createImage);

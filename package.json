@@ -4,7 +4,6 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js"
   },
   "keywords": [],
@@ -23,6 +22,7 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "multer": "^2.0.0",
-    "mysql2": "^3.14.1"
+    "mysql2": "^3.14.1",
+    "sequelize": "^6.37.7"
   }
 }

@@ -114,14 +114,6 @@
     text-decoration: underline;
 }
 
-/* Responsive improvements */
-@media (max-width: 767px) {
-    .tags-input {
-        max-width: 100%;
-    }
-    
-}
-
 html {
   height: 100%;
 }
@@ -129,13 +121,13 @@ html {
 body {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* toda la altura de la ventana */
+  min-height: 100vh;
   margin: 0;
 
 }
 
 main {
-  flex: 1; /* el contenido principal ocupa todo el espacio disponible */
+  flex: 1; 
 }
 
 #preview-img {
