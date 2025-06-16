@@ -18,14 +18,14 @@ Image.init(
       type: DataTypes.TEXT,
       allowNull: true,
     },
-    created_at: {
+    createdAt : {
       type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
+      defaultValue: new Date(),
     },
-    updated_at: {
+    updatedAt : {
       type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
-      onUpdate: DataTypes.NOW,
+      defaultValue: new Date(),
+      onUpdate: new Date(),
     },
   },
   {

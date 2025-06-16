@@ -10,6 +10,7 @@ router.get('/images/upload',imagesController.getImageForm);
 router.post('/images/create', upload.single('file'),imagesController.createImage);
 router.post('/images/update',imagesController.updateImage);
 router.post('/images/remove',imagesController.removeImage);
+router.get('/images/:id',imagesController.getImagesDetail);
 
 
 

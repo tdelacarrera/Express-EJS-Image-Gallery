@@ -20,9 +20,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/images">Imágenes</a>
                     </li>
+                     <% if(user) { %>
                     <li class="nav-item">
                         <a class="nav-link" href="/images/upload">Subir Imagen</a>
                     </li>
+                    <% } %>
                     <% if(user && user.role == 'Admin') { %>
                     <li class="nav-item">
                         <a class="nav-link" href="/users">Administrar Usuarios</a>

@@ -27,11 +27,11 @@ User.init(
       type: DataTypes.ENUM('admin', 'user'),
       allowNull: false,
     },
-    created_at: {
+    createdAt: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
     },
-    updated_at: {
+    updatedAt: {
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
       onUpdate: DataTypes.NOW,
@@ -41,7 +41,7 @@ User.init(
     sequelize,
     modelName: 'User',
     tableName: 'users',
-    timestamps: false, 
+    timestamps: true, 
   }
 );
 

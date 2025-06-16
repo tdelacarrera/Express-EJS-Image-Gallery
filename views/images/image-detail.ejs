@@ -1,0 +1,41 @@
+<%- include('../partials/header') %> <!-- Incluir el encabezado -->
+
+<main class="container mt-4">
+    <div class="row">
+        <!-- Imagen principal -->
+        <div class="col-md-8">
+            <img src="/uploads/<%= image.path %>" alt="image" class="img-fluid rounded shadow-sm mb-3">
+
+            <!-- Información de la imagen -->
+            <h2><%= image.title%></h2>
+
+            <!-- Etiquetas asociadas -->
+            <% if (image.tags && image.tags.length > 0) { %>
+                <div class="mb-3">
+                    <strong>Etiquetas:</strong>
+                    <% image.tags.split(',').forEach(tag => { %>
+                        <a href="/images?tag=<%= tag %>" class="badge bg-primary text-white me-1"><%= tag %></a>
+                    <% }) %>
+                </div>
+            <% } %>
+
+            <!-- Botón para volver -->
+            <a href="/images" class="btn btn-outline-secondary mt-3">← Volver a la galería</a>
+        </div>
+
+        <!-- Información adicional o relacionadas -->
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Detalles</h5>
+                    <ul class="list-unstyled">
+                        <li><strong>Nombre de archivo:</strong> <%= image.path %></li>
+                        <li><strong>Fecha de subida:</strong> <%= image.createdAt %></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<%- include('../partials/footer') %> <!-- Incluir el pie de página -->

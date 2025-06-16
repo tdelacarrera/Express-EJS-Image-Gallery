@@ -35,7 +35,7 @@ app.use('/bootstrap', express.static('node_modules/bootstrap/dist'));
 app.use(express.json());
 app.use(imagesRoutes);
 app.use(userRoutes);
-app.get("/", (req,res) => res.render("gallery/Images"));
+app.get("/", (req,res) => res.render("images/images"));
 
 
 sequelize.sync({ force: true })

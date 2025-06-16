@@ -37,7 +37,7 @@ const getImages = async (req, res) => {
   const tagsArray = tagsString.split(',').map(tag => tag.trim()).filter(tag => tag);
   const tags = [...new Set(tagsArray)];
 
-  res.render('gallery/images', {
+  res.render('images/images', {
     images: rows,
     title: 'Galería de Imágenes',
     currentPage: page,
@@ -47,7 +47,7 @@ const getImages = async (req, res) => {
 };
 
 const getImageForm = async (req, res) => {
-  res.render('gallery/upload', {
+  res.render('images/upload', {
     title: 'Formulario de imagenes'
   });
 }
@@ -66,7 +66,7 @@ const searchImage = async (req, res) => {
   const tagsArray = tagsString.split(',');
   const tags = [...new Set(tagsArray)];
 
-  res.render('gallery/images', {
+  res.render('images/images', {
     images: rows,
     title: 'Galería de Imágenes',
     currentPage: page,
@@ -87,8 +87,25 @@ const updateImage = async (req, res) => {
 }
 
 const removeImage = async (req, res) => {
-  await pool.query('DELETE FROM images WHERE user_id = ?', [req.body.id])
+  await pool.query('DELETE FROM images WHERE id = ?', [req.body.id])
   res.redirect(req.headers.referer);
+}
+
+const getImagesDetail = async (req, res) => {
+  try {
+    const id = req.params.id
+    const [rows] = await pool.query('SELECT * FROM images where id = ? ', [id])
+    const image = rows[0];
+
+    res.render('images/image-detail', {
+      title: 'Detalles de imagen',
+      image: image
+    });
+  } catch (error) {
+    return res.status(500).render('auth/login', { error: "Error en el servidor" })
+  }
+
+
 }
 
 
@@ -98,5 +115,6 @@ export const methods = {
   searchImage,
   createImage,
   updateImage,
-  removeImage
+  removeImage,
+  getImagesDetail
 }
