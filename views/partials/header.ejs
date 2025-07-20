@@ -25,15 +25,15 @@
                         <a class="nav-link" href="/images/upload">Subir Imagen</a>
                     </li>
                     <% } %>
-                    <% if(user && user.role == 'Admin') { %>
+                    <% if(user && user.role == 'admin') { %>
                     <li class="nav-item">
                         <a class="nav-link" href="/users">Administrar Usuarios</a>
                     </li>
                     <% } %>
+                    <% if(!user) { %>
                     <li class="nav-item">
                         <a class="nav-link" href="/users/register">Registro</a>
                     </li>
-                    <% if(!user) { %>
                     <li class="nav-item">
                         <a class="nav-link" href="/users/login">Iniciar Sesión</a>
                     </li>

@@ -5,9 +5,6 @@ import { fileURLToPath } from 'url';
 import 'jsonwebtoken';
 import { methods as  authorization } from './middlewares/authorization.js'
 import { PORT } from './config.js'
-import { sequelize } from './db.js';
-import './models/user.model.js'; 
-import './models/image.model.js'; 
 
 //routes
 import imagesRoutes from './routes/images.routes.js';
@@ -36,13 +33,3 @@ app.use(express.json());
 app.use(imagesRoutes);
 app.use(userRoutes);
 app.get("/", (req,res) => res.render("images/images"));
-
-
-sequelize.sync({ force: true })
-    .then(() => {
-        console.log('Base de datos sincronizada');
-    })
-    .catch((error) => {
-        console.error('Error al sincronizar la base de datos:', error);
-    });
-
