@@ -22,7 +22,7 @@ A simple image gallery web application built with **Express.js** and **EJS**.
 
     cp .env.example .env
 
-**4. Create datasbase, run migrations and seed data**
+**4. Create database, run migrations and seed data**
 
     npx sequelize-cli db:create
     npx sequelize-cli db:migrate
