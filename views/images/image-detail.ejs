@@ -4,7 +4,7 @@
     <div class="row">
         <!-- Imagen principal -->
         <div class="col-md-8">
-            <img src="/uploads/<%= image.path %>" alt="image" class="img-fluid rounded shadow-sm mb-3">
+            <img src="/uploads/<%= image.path %>" alt="image" class="img-fluid rounded shadow-sm mb-3" onError="this.onerror=null;this.src='../default-image.jpg';">
 
             <!-- Información de la imagen -->
             <h2><%= image.title%></h2>

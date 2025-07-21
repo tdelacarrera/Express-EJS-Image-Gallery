@@ -14,7 +14,7 @@ export async function up(queryInterface, Sequelize) {
       username: faker.internet.username(),
       email: faker.internet.email(),
       password: hash,
-      role: faker.helpers.arrayElement(['user']),
+      role: 'user',
       createdAt: new Date(),
       updatedAt: new Date(),
     });

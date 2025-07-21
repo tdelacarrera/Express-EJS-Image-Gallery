@@ -40,7 +40,7 @@
                             <!-- Card 1 -->
                             <div class="col-md-4 mb-2">
                                 <a class="card" href="/images/<%= image.id %>">
-                                    <img class="card-img-top" src="/uploads/<%= image.path %>" alt="Imagen">
+                                    <img class="card-img-top" src="/uploads/<%= image.path %>" alt="Imagen" onError="this.onerror=null;this.src='default-image.jpg';">
                                 </a>
                             </div>
                             <% }); %>
