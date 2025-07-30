@@ -14,8 +14,14 @@
 
                     <!-- Imagen -->
                     <div class="form-group mb-3">
+
                         <label for="file" class="form-label">Imagen</label>
-                        <input type="file" name="file" id="file" class="form-control  required>
+                        <input type="file" name="file" id="file" class="form-control  required" >
+                        
+                        <div id="image-preview-container" style="margin-top: 15px;">
+                            <img id="image-preview" src="../default-image.jpg"alt="Vista previa" style="max-width: 200px; min-width: 200px; height: auto; border: 1px solid #ddd; padding: 5px;">
+                        </div>
+
                     </div>
 
                     <!-- Etiquetas -->
@@ -52,6 +58,9 @@
     const tagsList = document.getElementById('tags');
     const inputTag = document.getElementById('tag');
     const tagsInputField = document.getElementById('tags-input');
+    const fileInput = document.getElementById('file');
+    const imagePreviewContainer = document.getElementById('image-preview-container');
+    const imagePreview = document.getElementById('image-preview');
 
     let tags = Array.from(tagsList.querySelectorAll('li')).map(li => li.innerText.replace('X', '').trim());
 
@@ -78,6 +87,7 @@
         }
     });
 
+
     tagsList.addEventListener('click', function(event) {
         if (event.target.classList.contains('delete-button')) {
             const tagItem = event.target.parentNode;
@@ -85,6 +95,21 @@
             tags = tags.filter(tag => tag !== tagText);
             tagItem.remove();
             updateTagsInput();
+        }
+    });
+
+    fileInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        
+        if (file) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;
+                imagePreviewContainer.style.display = 'block';
+            };
+            
+            reader.readAsDataURL(file);
         }
     });
 
